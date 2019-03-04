@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from django.conf import settings
 from django.http import HttpResponse
 from django.views.generic import TemplateView
 from mixr.models import *
@@ -10,12 +11,10 @@ from spotipy.oauth2 import SpotifyClientCredentials
 
 
 
-spotify = spotipy.Spotify(client_credentials_manager=client_credentials_manager)
 
 # Create your views here.
 class HomePageView(TemplateView):
     template_name = 'home.html'
     def get(self, request):
         form = HomeForm()
-
-        return render(request, self.template_name, args)
+        return render(request, self.template_name)
