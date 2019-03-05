@@ -1,0 +1,58 @@
+
+img {
+    float: top;
+    float: left;
+    max-height: 50%;
+    max-width: auto;
+    padding-top: 5px;
+}
+
+.flex-container {
+    padding-top: 75px;
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap: true;
+}
+
+.glyphicon.glyphicon-heart {
+    font-size: 40px;
+    text-align:bottom;
+    padding-top: 50;
+    padding-bottom: 3px;
+    padding-right: 200px;
+    color: green;
+}
+
+.topic {
+    font-size: 20px;
+    padding-left: 3px;
+    text-decoration: none;
+}
+
+.jumbotron {
+
+    height: 200;
+    width: 250;
+    padding-top: 3px;
+    padding-left: 3px;
+    padding-right: 3px;
+    padding-bottom: 3px;
+}
+
+h1 {
+    text-align: center;
+}
+
+p2 {
+    padding-left: 5px;
+    font-size: 20px;
+}
+
+p1 {
+    padding-left: 5px;
+    font-size: 15px;
+}
+
+body {
+    background-color: darkgrey;
+}

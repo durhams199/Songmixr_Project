@@ -11,6 +11,8 @@ https://docs.djangoproject.com/en/2.1/ref/settings/
 """
 
 import os
+import spotipy
+import spotipy.util as util
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
@@ -21,8 +23,10 @@ BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = os.environ.get('SECRET_KEY')
-CLIENT_ID = os.environ.get('CLIENT_ID')
-CLIENT_SECRET = os.environ.get('CLIENT_SECRET')
+CLIENT_ID_SPOT = os.environ.get('CLIENT_ID')
+CLIENT_SECRET_SPOT = os.environ.get('CLIENT_SECRET')
+TOKEN = util.prompt_for_user_token(username='cbass25', scope='playlist-read-private', client_id=CLIENT_ID_SPOT, 
+                            client_secret=CLIENT_SECRET_SPOT, redirect_uri='http://localhost:8000/callback')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
