@@ -27,7 +27,7 @@ CLIENT_ID_SPOT = os.environ.get('CLIENT_ID')
 CLIENT_SECRET_SPOT = os.environ.get('CLIENT_SECRET')
 TOKEN = util.prompt_for_user_token(username='cbass25', scope='playlist-read-private', client_id=CLIENT_ID_SPOT, 
                             client_secret=CLIENT_SECRET_SPOT, redirect_uri='http://localhost:8000/callback')
-
+SP = spotipy.Spotify(auth=TOKEN)
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 

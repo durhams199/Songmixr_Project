@@ -11,7 +11,7 @@ img {
     padding-top: 75px;
     display: flex;
     justify-content: space-evenly;
-    flex-wrap: true;
+    flex-wrap: wrap;
 }
 
 .glyphicon.glyphicon-heart {
@@ -30,9 +30,17 @@ img {
 }
 
 .jumbotron {
-
     height: 200;
     width: 250;
+    padding-top: 3px;
+    padding-left: 3px;
+    padding-right: 3px;
+    padding-bottom: 3px;
+}
+
+.jumbotron.b {
+    height: 400;
+    width: 600;
     padding-top: 3px;
     padding-left: 3px;
     padding-right: 3px;

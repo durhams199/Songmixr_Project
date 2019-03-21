@@ -1,14 +1,29 @@
 {% extends "base.html" %}
 
 {% block content %}
-<h1> {{results}} </h1>
-{% for playlist in results %}
     {% load playlist_loading %}
-      <div class="jumbotron">
-            <img src="{{playlist|playlist_photo}}"></img>
-            <a href = "{{playlist|playlist_id}}" class = "topic" <p2>{{playlist|playlist_name}} </p2><br> </a>
+      <div class="jumbotron b" >
+        <img src="{{playlist|playlist_photo}}"></img>
             <p1>By: {{playlist|playlist_owner}}</p1><br>
-      <a href="#"><span class="glyphicon glyphicon-heart"></span></a>
       </div>
-{% endfor %}
+      <table class="table table-dark">
+  <thead>
+    <tr>
+      <th scope="col">Track Title</th>
+      <th scope="col">Artist</th>
+      <th scope="col">Length</th>
+      <th scope="col">Add to Playlist</th>
+    </tr>
+  </thead>
+  <tbody>
+    {%for name in playlist|playlist_tracks%}
+    <tr>
+      <td>{{name}}</td>
+      <td></td>
+      <td></td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
 {% endblock %}
