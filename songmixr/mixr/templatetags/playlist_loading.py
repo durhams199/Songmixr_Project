@@ -19,6 +19,10 @@ def playlist_photo(result):
     playlist = settings.SP.user_playlist(user='', playlist_id= result.spotify_playlist_id)
     return playlist['images'][0]['url']
 
+@register.filter(name='profile_id')
+def profile_id(result):
+    return str(result.user_id.profile.get_absolute_url())
+
 @register.filter(name='playlist_owner')
 def playlist_owner(result):
     playlist = settings.SP.user_playlist(user='', playlist_id= result.spotify_playlist_id)

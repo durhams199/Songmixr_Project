@@ -1,5 +1,45 @@
 {% extends "base.html" %}
 
 {% block content %}
+    <!-- Link to CSS File -->
+    {% load static %}
+    <link href="{% static 'css/profile.css' %}" rel="stylesheet">
+        
+    {% load profile_loading %}
+        <p id = "rcorners" class = "center">
+            <img src="{{user_profile|user_photo}}" class = "object-fit_fill"></img>
+        </p>
+        <h1> {{user_profile|full_name}} </h1>
+        <input type="button" class="button" value="+ Follow">
+    <table style="width: 30%; margin-left: auto; margin-right: auto; margin-bottom: 50px; table-layout: fixed;">
+        <tr> 
+            <td style='font-size: 40px;'>{{user_profile.followers}}</td>
+            <td style='font-size: 40px;'>{{user_profile|total_playlists}}</td>
+            <td style='font-size: 40px;'>{{user_profile.lifetime_likes}}</td>
+        </tr>
+        <tr> 
+            <td> Followers </td>
+            <td> Playlists </td>
+            <td> Likes </td>
+        </tr>
+    </table>
+    <p id = "rcorners" class = "center" style = "width: 500px; height: 75px;">
+        <p1 style='font-size: 40px; color: white;'> Your Playlists <p1>
+    </p>
+    <div class ="flex-container">
+    {% for playlist in user_profile|playlist_list %}
+    {% load playlist_loading %}
+      <div class="jumbotron">
+            <img src="{{playlist|playlist_photo}}" style = "float: top;
+                                                            float: left;
+                                                            max-height: 50%;
+                                                            max-width: auto;
+                                                            padding-top: 5px;"></img>
+            <a href = "{{playlist|playlist_id}}" class = "topic" <p2>{{playlist|playlist_name}} </p2><br> </a>
 
+        <input type="button" class="button2" style = "margin-top: 41%;" value="Edit">
+        <input type="button" class="button2" style = "background-color: red; margin-top: 5px;" value="Delete">
+        </div>
+    {% endfor %}
+    </div>
 {% endblock %}

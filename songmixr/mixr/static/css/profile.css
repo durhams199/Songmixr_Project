@@ -1,0 +1,132 @@
+.object-fit_fill { object-fit: fill}
+
+.button {
+    background-color: #73AD21;
+    border: white;
+    color: white;
+    height: 40px;
+    width: 120px;
+    padding: 15 px 32 px;
+    text-align: center;
+    text-decoration: none;
+    display: block;
+    font-size: 20px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 10px;
+    cursor: pointer;
+    border-radius: 25px;
+
+}
+
+.button2 {
+    background-color: #73AD21;
+    border: white;
+    color: white;
+    height: 30px;
+    width: 90px;
+    padding: 15 px 32 px;
+    text-align: center;
+    text-decoration: none;
+    display: block;
+    font-size: 20px;
+    cursor: pointer;
+    border-radius: 25px;}
+
+
+
+.center {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+}
+
+
+#rcorners {
+    border-radius: 25px;
+    background: #73AD21;
+    padding: 10px;
+    width: 220px;
+    height: 220px;
+    text-align: center;
+}
+
+.topic {
+    font-size: 20px;
+    padding-left: 3px;
+    text-decoration: none;
+}
+
+.jumbotron {
+    height: 200;
+    width: 250;
+    padding-top: 3px;
+    padding-left: 3px;
+    padding-right: 3px;
+    padding-bottom: 3px;
+}
+
+.jumbotron.b {
+    height: 400;
+    width: 600;
+    padding-top: 3px;
+    padding-left: 3px;
+    padding-right: 3px;
+    padding-bottom: 3px;
+}
+
+tr {
+    height: 40px;
+    width: 120px;
+    text-align: center;
+    padding: 15px 32px;
+
+    margin-left: auto;
+    margin-right: auto;
+}
+
+td {
+    font-size: 25px;
+}
+
+h1 {
+    text-align: center;
+    font-size: 25px;
+}
+
+h2 {
+    text-align: center;
+    font-size: 25px;
+    word-spacing: 25px;
+}
+
+p2 {
+    padding-left: 5px;
+    font-size: 20px;
+}
+
+p1 {
+    padding-left: 5px;
+    font-size: 15px;
+}
+
+body {
+    background-color: darkgrey;
+}
+
+.flex-container {
+    padding-top: 20px;
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+}
+
+.glyphicon.glyphicon-heart {
+    font-size: 40px;
+    text-align:bottom;
+    padding-top: 50;
+    padding-bottom: 3px;
+    padding-right: 200px;
+    color: green;
+}

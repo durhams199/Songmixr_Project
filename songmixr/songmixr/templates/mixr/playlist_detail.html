@@ -1,6 +1,10 @@
 {% extends "base.html" %}
 
 {% block content %}
+
+<!-- Link to CSS File -->
+{% load static %}
+<link href="{% static 'css/style.css' %}" rel="stylesheet">
     {% load playlist_loading %}
       <div class="jumbotron b" >
         <img src="{{playlist|playlist_photo}}"></img>

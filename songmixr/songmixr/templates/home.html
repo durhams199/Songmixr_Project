@@ -1,6 +1,10 @@
 {% extends "base.html" %}
 
 {% block content %}
+<!-- Link to CSS File -->
+{% load static %}
+<link href="{% static 'css/style.css' %}" rel="stylesheet">
+
 <h1> Featured Playlists: </h1>
 <div class ="flex-container">
 {% for playlist in featured_playlists %}
@@ -8,6 +12,7 @@
       <div class="jumbotron">
             <img src="{{playlist|playlist_photo}}"></img>
             <a href = "{{playlist|playlist_id}}" class = "topic" <p2>{{playlist|playlist_name}} </p2><br> </a>
+            <a href = "{{playlist|profile_id}}" class = "topic" <p2>{{playlist|playlist_owner}} </p2><br> </a>
             <p1>By: {{playlist|playlist_owner}}</p1><br>
       <a href="#"><div class="glyphicon glyphicon-heart"></div></a>
       </div>

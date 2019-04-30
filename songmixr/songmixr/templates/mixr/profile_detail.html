@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <!-- Link to CSS File -->
+    {% load static %}
+    <link href="{% static 'css/profile.css' %}" rel="stylesheet">
+        
+    {% load profile_loading %}
+        <p id = "rcorners" class = "center">
+            <img src="{{profile|user_photo}}" class = "object-fit_fill"></img>
+        </p>
+        <h1> {{profile|full_name}} </h1>
+        <input type="button" class="button" value="+ Follow">
+        <table style="width: 30%; margin-left: auto; margin-right: auto; table-layout: fixed;">
+        <tr> 
+            <td style='font-size: 40px;'>{{profile.followers}}</td>
+            <td style='font-size: 40px;'>{{profile|total_playlists}}</td>
+            <td style='font-size: 40px;'>{{profile.lifetime_likes}}</td>
+        </tr>
+        <tr> 
+            <td> Followers </td>
+            <td> Playlists </td>
+            <td> Likes </td>
+        </tr>
+        </table>
+{% endblock %}

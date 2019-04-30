@@ -34,29 +34,26 @@ class HomePageView(TemplateView):
                 id_list.append(temp)
             print(id_list)
 
-            for playlist in id_list[:5]:
+            for playlist in id_list[:10]:
                 Playlist.objects.create(spotify_playlist_id = playlist,
-                                        user_id = current_username,
+                                        user_id = request.user,
                                         featured = True)'''
 
 
         args = {'form': form, 'featured_playlists': featured_playlists}
         return render(request, self.template_name, args)
+
 class AccountProfilePageView(LoginRequiredMixin, TemplateView):
     template_name = 'profile.html'
     def get(self, request):
         form = HomeForm()
-        current_username = request.user.username
-        current_user = request.user.social_auth.filter(provider="spotify")
-        for user in current_user:
-            token = user.extra_data['access_token']
-        User_SP = spotipy.Spotify(auth=token)
-        temp = User_SP.current_user()['images'][0]['url']
-        print(temp)
-
-        args = {'form': form}
+        user_profile = Profile.objects.get(user_id = request.user)
+        args = {'form': form, 'user_profile': user_profile}
         return render(request, self.template_name, args)
 
 from django.views import generic
 class PlaylistDetailView(generic.DetailView):
     model = Playlist
+
+class ProfileDetailView(generic.DetailView):
+    model = Profile
