@@ -43,7 +43,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'mixr.apps.MixrConfig'
+    'mixr.apps.MixrConfig',
+    'social_django'
 ]
 
 MIDDLEWARE = [
@@ -105,6 +106,34 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
+
+AUTHENTICATION_BACKENDS = (
+    'social_core.backends.spotify.SpotifyOAuth2',
+    'django.contrib.auth.backends.ModelBackend'
+)
+
+SOCIAL_AUTH_URL_NAMESPACE = 'social'
+
+SOCIAL_AUTH_SPOTIFY_KEY = os.environ.get('CLIENT_ID')
+SOCIAL_AUTH_SPOTIFY_SECRET = os.environ.get('CLIENT_SECRET')
+SOCIAL_AUTH_SPOTIFY_SCOPE = ['user-read-email','playlist-read-private',
+                              'playlist-modify-private', 'user-read-private']
+
+
+LOGOUT_REDIRECT_URL = '/'
+
+SOCIAL_AUTH_PIPELINE = (
+    'social_core.pipeline.social_auth.social_details',
+    'social_core.pipeline.social_auth.social_uid',
+    'social_core.pipeline.social_auth.auth_allowed',
+    'social_core.pipeline.social_auth.social_user',
+    'social_core.pipeline.user.get_username',
+    'social_core.pipeline.user.create_user',
+    'social_core.pipeline.social_auth.associate_user',
+    'social_core.pipeline.social_auth.load_extra_data',
+    'social_core.pipeline.user.user_details',
+
+)
 
 
 # Internationalization
