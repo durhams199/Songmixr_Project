@@ -7,7 +7,7 @@
         
     {% load profile_loading %}
         <p id = "rcorners" class = "center">
-            <img src="{{user_profile|user_photo}}" class = "object-fit_fill"></img>
+            <img src="{{user_profile.photo_url}}" class = "object-fit_fill"></img>
         </p>
         <h1> {{user_profile|full_name}} </h1>
         <input type="button" class="button" value="+ Follow">
@@ -23,8 +23,12 @@
             <td> Likes </td>
         </tr>
     </table>
-    <p id = "rcorners" class = "center" style = "width: 500px; height: 75px;">
-        <p1 style='font-size: 40px; color: white;'> Your Playlists <p1>
+            <p id = "rcorners" style = "width: 500px; height: 75px; display: inline-block; background-color: gray;margin-left: 30.5%;">
+             <p1 style='font-size: 40px; color: white;'> Your Playlists </p1>
+            </p> 
+        <form style = "display: contents;">
+            <button class = "button" style = "display: inline-block; margin-left: 10px; width: 150"formaction = "{% url 'add_playlist' %}"> Add Playlist </button>
+        </form>
     </p>
     <div class ="flex-container">
     {% for playlist in user_profile|playlist_list %}
@@ -36,9 +40,14 @@
                                                             max-width: auto;
                                                             padding-top: 5px;"></img>
             <a href = "{{playlist|playlist_id}}" class = "topic" <p2>{{playlist|playlist_name}} </p2><br> </a>
+            <p1> Likes: {{playlist.likes}}</p1>
 
-        <input type="button" class="button2" style = "margin-top: 41%;" value="Edit">
-        <input type="button" class="button2" style = "background-color: red; margin-top: 5px;" value="Delete">
+        <form style = "display: contents;" method="POST">
+            {% csrf_token %}
+            <button class="button2" type="submit" value = "edit" name = "edit" style = "margin-top: 32%;">Edit</button>
+            <button class="button2" type="submit" value = "delete" name = "delete" style = "background-color: red; margin-top: 5px;">Delete</button>
+            <input type="hidden" name="playlist_id" value = "{{playlist.spotify_playlist_id}}" >
+        </form>
         </div>
     {% endfor %}
     </div>

@@ -6,6 +6,9 @@ from django.db import models
 import json
 import spotipy
 import spotipy.util as util
+import requests
+from django.contrib.auth import *
+
 
 register = template.Library()
 
@@ -51,19 +54,34 @@ def playlist_tracks(result):
 def track_artist(result):
     playlist = settings.SP.user_playlist(user='', playlist_id= result.spotify_playlist_id, fields = "tracks,next")
     tracks = playlist['tracks']
-    track_list = []
+    artist_list = []
     for i, item in enumerate(tracks['items']):
         track = item['track']
-        artist = item['artist']
-        track_list.append(track['name']) 
-        artist_list.append(artist['artist']) 
+        artist = track['artists']
+        artist_list.append(artist[0]['name']) 
+    return artist_list
 
-    artists = playlist['artists']
-    artist_list = [] 
+@register.filter(name='track_album')
+def track_album(result):
+    playlist = settings.SP.user_playlist(user='', playlist_id= result.spotify_playlist_id, fields = "tracks,next")
+    tracks = playlist['tracks']
+    album_list = []
     for i, item in enumerate(tracks['items']):
-        track = item['artist']
-        track_list.append(track['name']) 
-        artist_list.append(track['artist'])   
-    args = {'track_list': track_list, 'artist_list': artist_playlists}
-    return args
+        track = item['track']
+        album = track['album']
+        album_list.append(album['name']) 
+    return album_list
+
+@register.filter(name='profile_exists')
+def profile_exists(result):
+    return result.exists()
+
+@register.simple_tag(name='has_like')
+def has_like(playlist, user_profile):
+    current_user_profile = user_profile.first()
+    if Like.objects.filter(playlist_id = playlist,
+                            like_from = current_user_profile.user_id).exists():
+        return True;
+    else: 
+        return False
     

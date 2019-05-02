@@ -1,0 +1,76 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <!-- Link to CSS File -->
+    {% load static %}
+    <link href="{% static 'css/add_playlist.css' %}" rel="stylesheet">
+    
+    <h1> all available playlists: <h1>
+        {% load playlist_loading %}
+        
+        {% for name in playlist %}
+        <p id = "rcorners" style = "width: 400px; height: 75px; display: inline-block; background-color: #73AD21;">
+            {{name|playlist_name}} added succesfully!
+        </p>
+        {% endfor %}
+
+    {% load profile_loading %}
+    <table>
+    <tr>
+    <td>
+        <table>
+            <thead>
+                <tr>
+                    <td> Playlist Titles </td>
+                </tr>
+            </thead>
+            <tbody> 
+                {% for name in user_profile|spotify_playlist_names %}
+                    <tr>       
+                        <td> {{name}} </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </td>
+    <td>
+        <table>
+            <thead>
+                <tr>
+                    <td> Total Songs </td>
+                </tr>
+            </thead>
+            <tbody> 
+                {% for tracks in user_profile|spotify_playlist_track_total %}
+                    <tr>       
+                        <td> {{tracks}} </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </td>
+    <td>
+        <table>
+            <thead>
+                <tr>
+                    <td> Add to List </td>
+                </tr>
+            </thead>
+            <tbody> 
+                {% for playlist_id in user_profile|spotify_playlist_id %}
+                    <tr>
+                    <td>
+                    <form style = "display: contents;" method="POST">
+                        {% csrf_token %}
+                        <button class = "button" style = "" type = "submit"> Add Playlist </button>
+                        <input type="hidden" name="playlist_id" value = "{{playlist_id}}" >
+                    </form>
+                    </td>     
+                    </tr>              
+                {% endfor %}
+            </tbody>
+        </table>
+    </td>
+</table>
+
+{% endblock %}

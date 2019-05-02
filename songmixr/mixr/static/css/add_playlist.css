@@ -1,18 +1,4 @@
-
-img {
-    float: top;
-    float: left;
-    max-height: 50%;
-    max-width: auto;
-    padding-top: 5px;
-}
-
-.flex-container {
-    padding-top: 75px;
-    display: flex;
-    justify-content: space-evenly;
-    flex-wrap: wrap;
-}
+.object-fit_fill { object-fit: fill}
 
 .button {
     background-color: #73AD21;
@@ -48,13 +34,25 @@ img {
     border-radius: 25px;
 }
 
-.glyphicon.glyphicon-heart {
-    font-size: 40px;
-    text-align:bottom;
-    padding-top: 50px;
-    padding-bottom: 3px;
-    padding-right: 200px;
-    color: green;
+
+
+.center {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+}
+
+
+#rcorners {
+    border-radius: 25px;
+    background: #73AD21;
+    color: white;
+    padding: 10px;
+    width: 220px;
+    height: 220px;
+    padding: 15 px 32 px;
+    text-align: center;
 }
 
 .topic {
@@ -81,8 +79,30 @@ img {
     padding-bottom: 3px;
 }
 
+tr {
+    height: 40px;
+    width: 120px;
+    text-align: center;
+    padding: 15px 32px;
+
+    margin-left: 10;
+    margin-right: auto;
+}
+
+td {
+    font-size: 25px;
+    margin-left: 10px;
+}
+
 h1 {
     text-align: center;
+    font-size: 25px;
+}
+
+h2 {
+    text-align: center;
+    font-size: 25px;
+    word-spacing: 25px;
 }
 
 p2 {
@@ -97,4 +117,20 @@ p1 {
 
 body {
     background-color: darkgrey;
+}
+
+.flex-container {
+    padding-top: 20px;
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+}
+
+.glyphicon.glyphicon-heart {
+    font-size: 40px;
+    text-align:bottom;
+    padding-top: 50;
+    padding-bottom: 3px;
+    padding-right: 200px;
+    color: green;
 }

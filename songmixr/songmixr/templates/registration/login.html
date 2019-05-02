@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block content %}
+<!-- Link to CSS File -->
+{% load static %}
+<link href="{% static 'css/profile.css' %}" rel="stylesheet">
+    <p id = "rcorners" style = "width: 500px; height: 170px; background-color: grey; margin-top: 100px;">
+        <p1 style='font-size: 25px; color: white;'> In order to use this site you will need to connect your spotify account. This will allow you to add playlists, maintain a profile, and interact with other users. <p1>
+    </p>
+    <form>
+        <button class = "button" style = "width: 300; margin-left: 10px; margin-right:;"formaction = "{% url "social:begin" "spotify" %}"> Connect With Spotify </button>
+    </form>
+        
+
+{% endblock %}

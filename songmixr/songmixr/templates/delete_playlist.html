@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <!-- Link to CSS File -->
+    {% load static %}
+    <link href="{% static 'css/add_playlist.css' %}" rel="stylesheet">
+    {% load playlist_loading %}
+        {% for name in playlist %}
+        <p id = "rcorners" style = "width: 500px; height: 125px; display: block; background-color: gray;">
+            <img src="{{name|playlist_photo}}" style = "float: top;
+                                                            float: left;
+                                                            max-height: 70%;
+                                                            max-width: auto;
+                                                            padding-top: 5px;"></img>
+            <br>Are you sure you would like to delete {{name|playlist_name}}?<br>
+            You will lose all of the likes accumulated with this playlist.
+        </p>
+        <form style = "display: contents;" method="POST">
+            {% csrf_token %}
+            <button class="button2" type="submit" value = "confirm" name = "confirm" 
+                style = "margin-top: 5px; display: inline-block;">Confirm</button>
+            <button class="button2" type="submit" value = "cancel" name = "cancel" style = "background-color: red; 
+                margin-top: 5px; display: inline-block;">Cancel</button>
+            <input type="hidden" name="playlist_id" value = "{{name.spotify_playlist_id}}" >
+        </form>
+        {% endfor %}
+
+{% endblock %}

@@ -27,3 +27,49 @@ def total_playlists(result):
 def playlist_list(result):
     return Playlist.objects.filter(user_id = result.user_id)
 
+@register.filter(name='spotify_playlist_names')
+def spotify_playlist_names(result):
+    token = result.access_token
+    User_SP = spotipy.Spotify(auth=token)
+    playlists = User_SP.user_playlists(result.user_id.username)
+    name_list = []
+    for item in playlists['items']:
+        if item['owner']['id'] == result.user_id.username:
+            temp = item['uri']
+            temp = temp[17:]
+            if not Playlist.objects.filter(spotify_playlist_id = temp).exists():
+                name_list.append(item['name'])
+    
+    return name_list
+
+@register.filter(name='spotify_playlist_id')
+def spotify_playlist_id(result):
+    token = result.access_token
+    User_SP = spotipy.Spotify(auth=token)
+    playlists = User_SP.user_playlists(result.user_id.username)
+    id_list = []
+    for item in playlists['items']:
+        if item['owner']['id'] == result.user_id.username:
+            temp = item['uri']
+            temp = temp[17:]
+            if not Playlist.objects.filter(spotify_playlist_id = temp).exists():
+                id_list.append(temp)
+    return id_list
+
+@register.filter(name='spotify_playlist_track_total')
+def spotify_playlist_track_total(result):
+    token = result.access_token
+    User_SP = spotipy.Spotify(auth=token)
+    playlists = User_SP.user_playlists(result.user_id.username)
+    track_counts = []
+    for item in playlists['items']:
+        if item['owner']['id'] == result.user_id.username:
+            temp = item['uri']
+            temp = temp[17:]
+            if not Playlist.objects.filter(spotify_playlist_id = temp).exists():
+                track_counts.append(item['tracks']['total'])
+    return track_counts
+
+@register.filter(name='liked_playlists')
+def liked_playlists(result):
+    return Like.objects.filter(like_from = result.first().user_id)

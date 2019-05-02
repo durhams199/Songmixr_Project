@@ -7,7 +7,7 @@
         
     {% load profile_loading %}
         <p id = "rcorners" class = "center">
-            <img src="{{profile|user_photo}}" class = "object-fit_fill"></img>
+            <img src="{{profile.photo_url}}" class = "object-fit_fill"></img>
         </p>
         <h1> {{profile|full_name}} </h1>
         <input type="button" class="button" value="+ Follow">
@@ -23,4 +23,25 @@
             <td> Likes </td>
         </tr>
         </table>
+
+
+        <p id = "rcorners" style = "width: 500px; height: 75px; display: inline-block; background-color: gray;
+                                    margin-left: 30.5%; margin-top: 50px;">
+        <p1 style='font-size: 40px; color: white;'> User Playlists </p1>
+        </p> 
+
+        <div class ="flex-container">
+            {% for playlist in profile|playlist_list %}
+            {% load playlist_loading %}
+            <div class="jumbotron">
+                <img src="{{playlist|playlist_photo}}" style = "float: top;
+                                                            float: left;
+                                                            max-height: 50%;
+                                                            max-width: auto;
+                                                            padding-top: 5px;"></img>
+                <a href = "{{playlist|playlist_id}}" class = "topic" <p2>{{playlist|playlist_name}} </p2><br> </a>
+                <p1> Likes: {{playlist.likes}}</p1>
+        </div>
+    {% endfor %}
+    </div>
 {% endblock %}

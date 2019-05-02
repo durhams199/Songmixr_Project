@@ -9,13 +9,118 @@
 <div class ="flex-container">
 {% for playlist in featured_playlists %}
     {% load playlist_loading %}
+    {% load profile_loading %}
       <div class="jumbotron">
             <img src="{{playlist|playlist_photo}}"></img>
             <a href = "{{playlist|playlist_id}}" class = "topic" <p2>{{playlist|playlist_name}} </p2><br> </a>
-            <a href = "{{playlist|profile_id}}" class = "topic" <p2>{{playlist|playlist_owner}} </p2><br> </a>
-            <p1>By: {{playlist|playlist_owner}}</p1><br>
-      <a href="#"><div class="glyphicon glyphicon-heart"></div></a>
+            <a href = "{{playlist|profile_id}}" class = "topic" <p2>By: {{playlist|playlist_owner}} </p2><br> </a><br>
+            <p1> Likes: {{playlist.likes}}</p1>
+
+        {% if user_profile|profile_exists %}
+            {% has_like playlist user_profile as is_liked %}
+            {% if is_liked %}
+                <form style = "display: contents;" method="POST">
+                    {% csrf_token %}
+                    <button class="button" type="submit" value = "unlike" name = "unlike" 
+                        style = "    background-color: #73AD21;
+                                    border: white;
+                                    color: white;
+                                    height: 25px;
+                                    width: 70px;
+                                    padding: 5 px 5 px;
+                                    text-align: center;
+                                    text-decoration: none;
+                                    display: block;
+                                    font-size: 20px;
+                                    margin-right: 200px;
+                                    margin-bottom: 3px;
+                                    margin-top: 70px;
+                                    cursor: pointer;
+                                    border-radius: 25px;"> Unlike </button>
+                <input type="hidden" name="playlist_id" value = "{{playlist.spotify_playlist_id}}" >
+                </form>
+        {% else %}
+            <form style = "display: contents;" method="POST">
+                {% csrf_token %}
+                <button class="button" type="submit" value = "like" name = "like" 
+                    style = "    background-color: #73AD21;
+                                    border: white;
+                                    color: white;
+                                    height: 25px;
+                                    width: 60px;
+                                    padding: 5 px 5 px;
+                                    text-align: center;
+                                    text-decoration: none;
+                                    display: block;
+                                    font-size: 20px;
+                                    margin-right: 200px;
+                                    margin-bottom: 3px;
+                                    margin-top: 70px;
+                                    cursor: pointer;
+                                    border-radius: 25px;"> Like </button>
+                <input type="hidden" name="playlist_id" value = "{{playlist.spotify_playlist_id}}" >
+            </form>
+            {% endif %}
+        {% else %}
+            <form style = "display: contents;" method="POST">
+                {% csrf_token %}
+                <button class="button" type="submit" value = "like" name = "like" 
+                    style = "    background-color: #73AD21;
+                                    border: white;
+                                    color: white;
+                                    height: 25px;
+                                    width: 60px;
+                                    padding: 5 px 5 px;
+                                    text-align: center;
+                                    text-decoration: none;
+                                    display: block;
+                                    font-size: 20px;
+                                    margin-right: 200px;
+                                    margin-bottom: 3px;
+                                    margin-top: 70px;
+                                    cursor: pointer;
+                                    border-radius: 25px;"> Like </button>
+                <input type="hidden" name="playlist_id" value = "{{playlist.spotify_playlist_id}}" >
+            </form>
+        {% endif %}
       </div>
+
 {% endfor %}
+</div>
+
+{% if user_profile|profile_exists %}
+    
+    <h1> Liked Playlists: </h1>
+    <div class ="flex-container">
+    {% for playlist in user_profile|liked_playlists %}
+        <div class="jumbotron">
+            <img src="{{playlist.playlist_id|playlist_photo}}"></img>
+            <a href = "{{playlist.playlist_id|playlist_id}}" class = "topic" <p2>{{playlist.playlist_id|playlist_name}} </p2><br> </a>
+            <a href = "{{playlist.playlist_id|profile_id}}" class = "topic" <p2>By: {{playlist.playlist_id|playlist_owner}} </p2><br> </a><br>
+            <p1> Likes: {{playlist.playlist_id.likes}}</p1>
+
+                <form style = "display: contents;" method="POST">
+                    {% csrf_token %}
+                    <button class="button" type="submit" value = "unlike" name = "unlike" 
+                        style = "    background-color: #73AD21;
+                                    border: white;
+                                    color: white;
+                                    height: 25px;
+                                    width: 70px;
+                                    padding: 5 px 5 px;
+                                    text-align: center;
+                                    text-decoration: none;
+                                    display: block;
+                                    font-size: 20px;
+                                    margin-right: 200px;
+                                    margin-bottom: 3px;
+                                    margin-top: 70px;
+                                    cursor: pointer;
+                                    border-radius: 25px;"> Unlike </button>
+                <input type="hidden" name="playlist_id" value = "{{playlist.playlist_id.spotify_playlist_id}}" >
+                </form>
+      </div>
+    {% endfor %}
+{% endif %}
 </div>
 {% endblock %}

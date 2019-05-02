@@ -117,7 +117,7 @@ SOCIAL_AUTH_URL_NAMESPACE = 'social'
 SOCIAL_AUTH_SPOTIFY_KEY = os.environ.get('CLIENT_ID')
 SOCIAL_AUTH_SPOTIFY_SECRET = os.environ.get('CLIENT_SECRET')
 SOCIAL_AUTH_SPOTIFY_SCOPE = ['user-read-email','playlist-read-private',
-                              'playlist-modify-private', 'user-read-private']
+                              'playlist-modify-private', 'user-read-private', 'user-follow-read', 'user-follow-modify']
 
 
 LOGOUT_REDIRECT_URL = '/'
