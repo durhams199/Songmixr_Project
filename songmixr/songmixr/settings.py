@@ -22,11 +22,16 @@ BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 # See https://docs.djangoproject.com/en/2.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
+
+# enviroment variables
 SECRET_KEY = os.environ.get('SECRET_KEY')
 CLIENT_ID_SPOT = os.environ.get('CLIENT_ID')
 CLIENT_SECRET_SPOT = os.environ.get('CLIENT_SECRET')
+
+# token used to display public playlists (uses personal spotify information)
 TOKEN = util.prompt_for_user_token(username='cbass25', scope='playlist-read-private', client_id=CLIENT_ID_SPOT, 
                             client_secret=CLIENT_SECRET_SPOT, redirect_uri='http://localhost:8000/callback')
+# authorizes Spotify connection using generated token
 SP = spotipy.Spotify(auth=TOKEN)
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -107,13 +112,14 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+# includes backend for social_auth
 AUTHENTICATION_BACKENDS = (
     'social_core.backends.spotify.SpotifyOAuth2',
     'django.contrib.auth.backends.ModelBackend'
 )
 
+# authorization information for social_auth
 SOCIAL_AUTH_URL_NAMESPACE = 'social'
-
 SOCIAL_AUTH_SPOTIFY_KEY = os.environ.get('CLIENT_ID')
 SOCIAL_AUTH_SPOTIFY_SECRET = os.environ.get('CLIENT_SECRET')
 SOCIAL_AUTH_SPOTIFY_SCOPE = ['user-read-email','playlist-read-private',
@@ -122,6 +128,7 @@ SOCIAL_AUTH_SPOTIFY_SCOPE = ['user-read-email','playlist-read-private',
 
 LOGOUT_REDIRECT_URL = '/'
 
+# all of the included information for social_auth
 SOCIAL_AUTH_PIPELINE = (
     'social_core.pipeline.social_auth.social_details',
     'social_core.pipeline.social_auth.social_uid',
