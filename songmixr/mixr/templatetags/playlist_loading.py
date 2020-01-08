@@ -12,26 +12,31 @@ from django.contrib.auth import *
 
 register = template.Library()
 
+# gets name of playlist using spotify_id
 @register.filter(name='playlist_name')
 def playlist_name(result):
     playlist = settings.SP.user_playlist(user='', playlist_id= result.spotify_playlist_id)
     return playlist['name']
 
+# gets playlist photo using spotify_id
 @register.filter(name='playlist_photo')
 def playlist_photo(result):
     playlist = settings.SP.user_playlist(user='', playlist_id= result.spotify_playlist_id)
     return playlist['images'][0]['url']
 
+# gets profile_id
 @register.filter(name='profile_id')
 def profile_id(result):
     return str(result.user_id.profile.get_absolute_url())
 
+# gets owner of a playlist using spotify_id 
 @register.filter(name='playlist_owner')
 def playlist_owner(result):
     playlist = settings.SP.user_playlist(user='', playlist_id= result.spotify_playlist_id)
     user_link = playlist['owner']['external_urls']['spotify']
     return user_link[user_link.find('user/') + 5:]
 
+# gets playlist_id
 @register.filter(name='playlist_id')
 def playlist_id(result):
     playlist = settings.SP.user_playlist(user='', playlist_id= result.spotify_playlist_id)
@@ -40,6 +45,7 @@ def playlist_id(result):
     true_playlist_id = Playlist.objects.filter(spotify_playlist_id = spotify_playlist_id_temp)
     return true_playlist_id[0].get_absolute_url()
 
+# gets all of the tracks for a spotify playlist
 @register.filter(name='playlist_tracks')
 def playlist_tracks(result):
     playlist = settings.SP.user_playlist(user='', playlist_id= result.spotify_playlist_id, fields = "tracks,next")
@@ -50,6 +56,7 @@ def playlist_tracks(result):
         track_list.append(track['name'])  
     return track_list
 
+# gets list of artists for tracks in a playlist
 @register.filter(name='track_artist')
 def track_artist(result):
     playlist = settings.SP.user_playlist(user='', playlist_id= result.spotify_playlist_id, fields = "tracks,next")
@@ -61,6 +68,7 @@ def track_artist(result):
         artist_list.append(artist[0]['name']) 
     return artist_list
 
+# gets album associated with each track in a playlist
 @register.filter(name='track_album')
 def track_album(result):
     playlist = settings.SP.user_playlist(user='', playlist_id= result.spotify_playlist_id, fields = "tracks,next")
@@ -72,10 +80,12 @@ def track_album(result):
         album_list.append(album['name']) 
     return album_list
 
+# checks to make sure a profile exists
 @register.filter(name='profile_exists')
 def profile_exists(result):
     return result.exists()
 
+# checks to see if a playlist has a like from a user
 @register.simple_tag(name='has_like')
 def has_like(playlist, user_profile):
     current_user_profile = user_profile.first()

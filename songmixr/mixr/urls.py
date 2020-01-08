@@ -10,5 +10,6 @@ urlpatterns = [
     path('accounts/profile/add_playlist', AddPlaylistPageView.as_view(), name='add_playlist'),
     path('playlist/<str:pk>', PlaylistDetailView.as_view(), name='playlist-detail'),
     path('accounts/profile/<str:pk>', ProfileDetailView.as_view(), name='profile-detail'),
+    path('browse/', BrowsePageView.as_view(), name = 'browse'),
     path('login/', HomePageView.as_view(), name='login'),
 ]

@@ -158,6 +158,15 @@ class AccountProfilePageView(LoginRequiredMixin, TemplateView):
         args = {'form': form, 'user_profile': user_profile}
         return render(request, self.template_name, args)
 
+class BrowsePageView(TemplateView):
+    template_name = 'browse.html'
+
+    def get (self, request):
+        form = HomeForm()
+        top_users = Profile.objects.all().aggregate(Max(lifetime_likes))[5:]
+        args = {'form': form, top_users: 'top_users'}
+        return render(request, self.template_name, args)
+
 # page that user is directed to if they attempt to add a new playlist
 class AddPlaylistPageView(LoginRequiredMixin, TemplateView):
     template_name = 'add_playlist.html'

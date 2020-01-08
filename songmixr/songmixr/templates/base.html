@@ -13,7 +13,7 @@
       <a class="navbar-brand" href="{% url 'home' %}">SongMixr</a>
     </div>
     <ul class="nav navbar-nav">
-      <li><a href="#">Browse</a></li>
+      <li><a href="browse">Browse</a></li>
       {% if user.is_authenticated %}
           <li><a href="{% url 'profile' %}">Profile</a></li>
       {% endif %}
